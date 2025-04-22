@@ -1,16 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-class Post extends StatefulWidget {
+
+
+// Flutter object that represents a Post
+@JsonSerializable(explicitToJson: true)
+class Post {
+  final String id;
+  final String name;
+  final String description;
+  final String fundsRequested;
+  final String fundsRecieved;
+
+  Post({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.fundsRequested,
+    required this.fundsRecieved,
+  });
+
+  factory Post.fromjson(Map<String, dynamic> json) =>
+    Post(
+      id: json["id"],
+      name: json["name"],
+      description: json["description"],
+      fundsRequested: json["fundsRequested"],
+      fundsRecieved: json["fundsRecieved"]
+    );
+
+    Map<String, dynamic> toJson() => {
+      'id': id,
+      'name': name,
+      'description': description,
+      'fundsRequested': fundsRequested,
+      'fundsRecieved': fundsRecieved,
+    };
+
+
+
+}
+
+// A post UI element to encapsulate and represent all post data
+class PostUI extends StatefulWidget {
   final String id;
   final String postText;
   final int fundsRequested;
   int fundsRaised = 0;
-  Post({required this.id,required this.postText, required this.fundsRequested});
+  PostUI({
+    required this.id,
+    required this.postText,
+    required this.fundsRequested
+  });
   @override
-  _PostState createState() => _PostState();
+  _PostUIState createState() => _PostUIState();
 }
 
-class _PostState extends State<Post> {
+class _PostUIState extends State<PostUI> {
 
   @override
   Widget build(BuildContext context) {

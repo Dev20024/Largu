@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:namer_app/Resources/Ids.dart';
 import 'package:namer_app/Resources/Posts.dart';
 
@@ -13,8 +15,18 @@ class _PostCreatorPageState extends State<PostCreatorPage> {
   
   @override
   Widget build(BuildContext context) {
+    getPost(context);
     return Center(
-      child: Post(id: generateTimeStampId(), postText: "Hello", fundsRequested: 100),
+      child: PostUI(id: generateTimeStampId(), postText: "Hello", fundsRequested: 100),
     );
+
+    
+  }
+
+  void getPost(BuildContext context) async {
+    final file = await rootBundle.loadString('assets/response.json');
+    final json = jsonDecode(file);
+
+    print(json);
   }
 }
