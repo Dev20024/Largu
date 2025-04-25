@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -9,8 +11,8 @@ class Post {
   final String id;
   final String name;
   final String description;
-  final String fundsRequested;
-  final String fundsRecieved;
+  final int fundsRequested;
+  final Float fundsRecieved;
 
   Post({
     required this.id,
@@ -29,13 +31,19 @@ class Post {
       fundsRecieved: json["fundsRecieved"]
     );
 
-    Map<String, dynamic> toJson() => {
-      'id': id,
-      'name': name,
-      'description': description,
-      'fundsRequested': fundsRequested,
-      'fundsRecieved': fundsRecieved,
-    };
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'description': description,
+    'fundsRequested': fundsRequested,
+    'fundsRecieved': fundsRecieved,
+  };
+
+  PostUI toUI() {
+    return PostUI(id: id, postText: description, fundsRequested: fundsRequested);
+  }
+
+    
 
 
 
