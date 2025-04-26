@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:namer_app/Resources/Ids.dart';
-import 'package:namer_app/Resources/Posts.dart';
+import 'package:namer_app/Resources/posts.dart';
 
 
 class PostCreatorPage extends StatefulWidget {
@@ -42,8 +41,11 @@ class _PostCreatorPageState extends State<PostCreatorPage> {
   Future<PostUI> getExamplePost(BuildContext context) async {
     print("first post function fired");
     final file = await rootBundle.loadString('assets/response.json');
-    final json = jsonDecode(file);
-    Post firstPost = Post.fromjson(json[0]);
+    print("json filed fetched");
+    Map<String, dynamic> jsonMap = jsonDecode(file)["Posts"][0];
+    print(jsonMap);
+    Post firstPost = Post.fromJson(jsonMap);
+    print("First Post: $firstPost ");
     return firstPost.toUI();
   }
 }

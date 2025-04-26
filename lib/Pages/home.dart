@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:namer_app/Resources/Ids.dart';
-import 'package:namer_app/Resources/Posts.dart';
+import 'package:namer_app/Resources/posts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -9,7 +9,7 @@ Future<Post> fetchPost() async {
   final response = await http.get(uri);
 
   if (response.statusCode == 200) {
-    return Post.fromjson(jsonDecode(response.body));
+    return Post.fromJson(jsonDecode(response.body));
   } else {
     throw Exception("Failed to load post");
   }

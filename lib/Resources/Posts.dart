@@ -1,8 +1,9 @@
-import 'dart:ffi';
+library posts;
 
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'posts.g.dart';
 
 
 // Flutter object that represents a Post
@@ -12,7 +13,7 @@ class Post {
   final String name;
   final String description;
   final int fundsRequested;
-  final Float fundsRecieved;
+  final String fundsRecieved;
 
   Post({
     required this.id,
@@ -22,30 +23,12 @@ class Post {
     required this.fundsRecieved,
   });
 
-  factory Post.fromjson(Map<String, dynamic> json) =>
-    Post(
-      id: json["id"],
-      name: json["name"],
-      description: json["description"],
-      fundsRequested: json["fundsRequested"],
-      fundsRecieved: json["fundsRecieved"]
-    );
-
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'description': description,
-    'fundsRequested': fundsRequested,
-    'fundsRecieved': fundsRecieved,
-  };
-
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+  Map<String, dynamic> toJson() => _$PostToJson(this);  
+  
   PostUI toUI() {
     return PostUI(id: id, postText: description, fundsRequested: fundsRequested);
   }
-
-    
-
-
 
 }
 
