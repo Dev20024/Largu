@@ -39,13 +39,20 @@ class _PostCreatorPageState extends State<PostCreatorPage> {
   }
 
   Future<PostUI> getExamplePost(BuildContext context) async {
+    try {
     print("first post function fired");
     final file = await rootBundle.loadString('assets/response.json');
     print("json filed fetched");
     Map<String, dynamic> jsonMap = jsonDecode(file)["Posts"][0];
     print(jsonMap);
     Post firstPost = Post.fromJson(jsonMap);
-    print("First Post: $firstPost ");
+    print("WHY DONT U EXECUTE");
     return firstPost.toUI();
+    } catch (e, stracktrace) {
+      print("Error Occured: $e");
+      print("Stracktrace: $stracktrace");
+      throw e;
+    }
+
   }
 }

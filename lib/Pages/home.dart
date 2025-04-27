@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:namer_app/Resources/Ids.dart';
 import 'package:namer_app/Resources/posts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<Post> fetchPost() async {
-  final uri = Uri.parse("http://jsonplaceholder.typicode.com/posts/1");
-  final response = await http.get(uri);
 
-  if (response.statusCode == 200) {
-    return Post.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception("Failed to load post");
-  }
-}
 
 class HomePage extends StatefulWidget {
 
@@ -24,13 +16,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   
   // recent viewed posts data (horizontal scroll)
-  final recentViewedPosts = List<PostUI>.generate(10, (index) {
-    return PostUI(id: generateTimeStampId(), postText: "Post #${index+1}", fundsRequested: index * 100,);
-  });
+  List<Post> recentViewedPosts = [];
+    
+  // fetch recent posts data from json file
+  Future<void> fetchRecentPosts() async {
+    final file = await rootBundle.loadString('assets/recentPosts.json');
+    
+    recentViewedPosts = (jsonDecode(file)["Posts"] as List<dynamic>)
+        .map((data) => Post.fromJson(data))
+        .toList();
+
+    setState(() {
+      recentViewedPosts = recentViewedPosts;
+    });
+  }
 
   // recommended posts data (vertical scroll)
   late final ScrollController recommendedPostsController;
-  List<PostUI> recommendedPosts = [];
+  List<Post> recommendedPosts = [];
   bool isLoading = false;
   int page = 0;
 
@@ -41,6 +44,7 @@ class _HomePageState extends State<HomePage> {
     print("Initializing HomePage");
     recommendedPostsController = ScrollController()
       ..addListener(recScrollListener);
+    fetchRecentPosts();
     loadRecommendedPosts();
   }
 
@@ -60,14 +64,15 @@ class _HomePageState extends State<HomePage> {
       isLoading = true;
     });
 
-    //await Future.delayed(Duration(seconds: 2));
+    List<Post> newPosts = [];
+
+    final file = await rootBundle.loadString('assets/response.json');
+    await Future.delayed(const Duration(seconds: 2), () {}); // Simulate network delay
+    newPosts = (jsonDecode(file)["Posts"] as List<dynamic>)
+        .map((data) => Post.fromJson(data))
+        .toList();
+
     if (!mounted) return;
-    
-    List<PostUI> newPosts = [];
-    
-    for (int i = 0; i < 10; i++) {
-      newPosts.add(PostUI(id: generateTimeStampId(), postText: '${page * 10 + i + 1}', fundsRequested: i*10));
-    }
     
     setState(() {
       recommendedPosts.addAll(newPosts);
@@ -120,13 +125,9 @@ class _HomePageState extends State<HomePage> {
               separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 25,),
               itemBuilder: (BuildContext context, int index) {
                 
-                PostUI postInfo = recentViewedPosts[index];
+                Post postInfo = recentViewedPosts[index];
 
-                return PostUI(
-                  id: postInfo.id,
-                  postText: postInfo.postText, 
-                  fundsRequested: postInfo.fundsRaised,
-                );
+                return postInfo.toUI();
               },
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
@@ -141,14 +142,17 @@ class _HomePageState extends State<HomePage> {
             // Recommended Posts Scroll Bar
             Expanded(
               child: ListView.builder (
+                  addAutomaticKeepAlives: false,
                   cacheExtent: 10,
                   controller: recommendedPostsController,
                   itemCount: recommendedPosts.length + (isLoading ? 1: 0), // add 1 for loading indicator
                   itemBuilder: (context, index) {
                     if (index < recommendedPosts.length) {
-                      print(recommendedPosts[index]);
-                      PostUI postData = recommendedPosts[index];
-                      return PostUI(id: postData.id, postText: postData.postText, fundsRequested: postData.fundsRequested);
+                      Post postData = recommendedPosts[index];
+                      return Padding(
+                        padding: EdgeInsets.only(left: 50.0, right: 50.0, bottom: 20.0, top: 20.0),
+                        child: postData.toUI(),
+                      ); 
                     }
                     // load indicator at the end
                     return Center(child: CircularProgressIndicator());

@@ -1,0 +1,110 @@
+{
+    "Posts": [
+        {
+            "id": "12345",
+            "name": "Exploring the Mountains",
+            "description": "A journey through the breathtaking mountain ranges.",
+            "fundsRequested": 5000,
+            "fundsReceived": 2500
+        },
+        {
+            "id": "67890",
+            "name": "Delicious Homemade Recipes",
+            "description": "Sharing the best recipes for homemade meals.",
+            "fundsRequested": 3000,
+            "fundsReceived": 1500
+        },
+        {
+            "id": "11223",
+            "name": "Top 10 Coding Tips",
+            "description": "Essential tips to improve your coding skills.",
+            "fundsRequested": 2000,
+            "fundsReceived": 800
+        },
+        {
+            "id": "44556",
+            "name": "Beach Cleanup Initiative",
+            "description": "Join us in cleaning up our local beaches.",
+            "fundsRequested": 4000,
+            "fundsReceived": 2200
+        },
+        {
+            "id": "77889",
+            "name": "Art for Everyone",
+            "description": "Promoting art education for underprivileged children.",
+            "fundsRequested": 6000,
+            "fundsReceived": 3200
+        },
+        {
+            "id": "99001",
+            "name": "Tech for Seniors",
+            "description": "Providing technology training for senior citizens.",
+            "fundsRequested": 3500,
+            "fundsReceived": 1800
+        },
+        {
+            "id": "22334",
+            "name": "Community Garden Project",
+            "description": "Creating a community garden for everyone to enjoy.",
+            "fundsRequested": 2500,
+            "fundsReceived": 1200
+        },
+        {
+            "id": "55667",
+            "name": "Wildlife Conservation",
+            "description": "Protecting endangered species in our region.",
+            "fundsRequested": 8000,
+            "fundsReceived": 4500
+        },
+        {
+            "id": "88990",
+            "name": "Music for the Soul",
+            "description": "Organizing free music concerts for the community.",
+            "fundsRequested": 5000,
+            "fundsReceived": 2700
+        },
+        {
+            "id": "33445",
+            "name": "STEM Workshops",
+            "description": "Hosting STEM workshops for young learners.",
+            "fundsRequested": 7000,
+            "fundsReceived": 3500
+        },
+        {
+            "id": "66778",
+            "name": "Healthy Living Campaign",
+            "description": "Promoting healthy living through fitness programs.",
+            "fundsRequested": 4000,
+            "fundsReceived": 2000
+        },
+        {
+            "id": "99012",
+            "name": "Local History Preservation",
+            "description": "Preserving the history of our local community.",
+            "fundsRequested": 3000,
+            "fundsReceived": 1500
+        },
+        {
+            "id": "11234",
+            "name": "Coding Bootcamp Scholarships",
+            "description": "Providing scholarships for coding bootcamps.",
+            "fundsRequested": 10000,
+            "fundsReceived": 5000
+        },
+        {
+            "id": "44567",
+            "name": "Mental Health Awareness",
+            "description": "Raising awareness about mental health issues.",
+            "fundsRequested": 6000,
+            "fundsReceived": 3000
+        },
+        {
+            "id": "77890",
+            "name": "Clean Water Initiative",
+            "description": "Providing clean water to remote villages.",
+            "fundsRequested": 12000,
+            "fundsReceived": 8000
+        }
+        
+    ]
+}

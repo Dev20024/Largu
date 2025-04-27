@@ -11,7 +11,7 @@ Post _$PostFromJson(Map<String, dynamic> json) => Post(
       name: json['name'] as String,
       description: json['description'] as String,
       fundsRequested: (json['fundsRequested'] as num).toInt(),
-      fundsRecieved:  json['fundsRecieved'] as String,
+      fundsReceived: (json['fundsReceived'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
@@ -19,5 +19,5 @@ Map<String, dynamic> _$PostToJson(Post instance) => <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
       'fundsRequested': instance.fundsRequested,
-      'fundsRecieved': instance.fundsRecieved.toString(),
+      'fundsReceived': instance.fundsReceived,
     };

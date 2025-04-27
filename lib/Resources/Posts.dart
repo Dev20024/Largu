@@ -1,5 +1,3 @@
-library posts;
-
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -13,14 +11,14 @@ class Post {
   final String name;
   final String description;
   final int fundsRequested;
-  final String fundsRecieved;
+  final int fundsReceived;
 
   Post({
     required this.id,
     required this.name,
     required this.description,
     required this.fundsRequested,
-    required this.fundsRecieved,
+    required this.fundsReceived,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
