@@ -1,13 +1,42 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:namer_app/Resources/posts.dart';
+
 
 
 class SearchPage extends StatefulWidget {
 
   @override
   State<SearchPage> createState() => _SearchPageState();
+
 }
 
 class _SearchPageState extends State<SearchPage> {
+
+  List<Post> postDataBase = [];
+
+  Future<void> fetchPosts() async {
+  // Simulate a network call
+
+  final file = await rootBundle.loadString('assets/postDataBase.json');
+  // Simulate a delay
+  await Future.delayed(const Duration(seconds: 2));
+
+  // Decode the JSON data
+  postDataBase = (jsonDecode(file)["Posts"] as List<dynamic>)
+    .map((data) => Post.fromJson(data))
+    .toList();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchPosts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
         actions: [
           IconButton(
             onPressed: () {
-              showSearch(context: context, delegate: CustomSearchDelegate());
+              showSearch(context: context, delegate: CustomSearchDelegate(postDataBase));
             },
             icon: const Icon(Icons.search),
           )
@@ -26,17 +55,16 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
+
+
+ 
+
+
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    "Apple",
-    "Banana",
-    "Pear",
-    "Watermelons",
-    "Oranges",
-    "Blueberries",
-    "Strawberries",
-    "Raspberries",
-  ];
+  final List<Post> posts;
+
+
+  CustomSearchDelegate(this.posts);
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -62,39 +90,39 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if  (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
-      }
-    }
+    // filter posts based on the query
+    List<Post> matchQuery = posts.where((post) {
+      return post.name.toLowerCase().contains(query.toLowerCase());
+    }).toList();
+
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
+        var post = matchQuery[index];
+        return post.toUI();
       },
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if  (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
-      }
-    }
-     return ListView.builder(
+    // Provide suggestions based on the query
+    List<Post> matchQuery = posts.where((post) {
+      return post.name.toLowerCase().contains(query.toLowerCase());
+    }).toList();
+
+    return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        var result = matchQuery[index];
+        var post = matchQuery[index];
         return ListTile(
-          title: Text(result),
+          title: Text(post.name),
+          onTap: () {
+            query = post.name;
+            showResults(context);
+          }
         );
-      },
+      }
     );
   }
 }

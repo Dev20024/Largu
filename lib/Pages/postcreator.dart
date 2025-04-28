@@ -11,28 +11,16 @@ class PostCreatorPage extends StatefulWidget {
 }
 
 class _PostCreatorPageState extends State<PostCreatorPage> {
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _fundsRequestedController = TextEditingController();
   
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FutureBuilder(
-        future: getExamplePost(context), 
-        builder: (context, AsyncSnapshot snapshot) {
-          if (snapshot.hasError && snapshot.data == null) {
-            return Text(
-              "Error: ${snapshot.data.toString()}",
-            );
-          }
-          else if (snapshot.hasData) {
-            return snapshot.data;
-          }
-          else {
-            return Text(
-              "Waiting for a Post",
-            );
-          }
-        }
-        ),
+      // Post Creation UI
+
     );
 
     

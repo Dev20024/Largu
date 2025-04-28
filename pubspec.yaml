@@ -31,3 +31,4 @@ flutter:
   assets:
     - assets/response.json
     - assets/recentPosts.json
+    - assets/postDataBase.json
