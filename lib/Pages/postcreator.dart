@@ -13,29 +13,36 @@ class PostCreatorPage extends StatefulWidget {
 
 class _PostCreatorPageState extends State<PostCreatorPage> {
 
+  final postStorage = PostStorage();
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _fundsRequestedController = TextEditingController();
 
   void createPost() {
+    // User input controllers.
     String name = _nameController.text;
     String description = _descriptionController.text;
     String fundsRequested = _fundsRequestedController.text;
+    // variable verification
     int? fundsRequestedNumeric = int.tryParse(fundsRequested);
     print(fundsRequested);
     print(fundsRequestedNumeric);
     bool valid = true;
     String errorMessage = "";
-    // check validity of form
+
+    // Check if all fields are filled.
     if (name.isEmpty || description.isEmpty || fundsRequested.isEmpty) {
       valid = false;
       errorMessage = "Make sure all Text Fields are filled out!";
     }
+    // Check if dollar amount is Valid.
     else if (fundsRequestedNumeric == null ||  (fundsRequestedNumeric < 0) || (fundsRequestedNumeric > 10000) ) {
       valid = false;
       errorMessage = "Invalid Dollar amount!";
     }
-
+    
+    // If the form is not valid, display the proper error message.
     if (!valid) {
       showDialog(
         context: context,
@@ -53,7 +60,7 @@ class _PostCreatorPageState extends State<PostCreatorPage> {
       return;
     }
 
-    // create the post
+    // create the post and add it to storage.
     Post newUserPost = Post(
       id: generateTimeStampId(),
       name: _nameController.text,
@@ -62,13 +69,15 @@ class _PostCreatorPageState extends State<PostCreatorPage> {
       fundsReceived: 0,
     );
 
+    postStorage.addPost(newUserPost);
+    // Display post creation success message.
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(
         title: Text("Alert"),
         content: Text("Post Successfully Created!"),
       )
-      );
+    );
   }
   
   @override
@@ -164,7 +173,7 @@ class _PostCreatorPageState extends State<PostCreatorPage> {
     } catch (e, stracktrace) {
       print("Error Occured: $e");
       print("Stracktrace: $stracktrace");
-      throw e;
+      rethrow;
     }
 
   }

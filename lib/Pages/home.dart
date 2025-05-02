@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:namer_app/Resources/Ids.dart';
 import 'package:namer_app/Resources/posts.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 

@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'posts.g.dart';
 
@@ -110,5 +115,52 @@ class _PostUIState extends State<PostUI> {
         ),
       )
     );
+  }
+}
+
+class PostStorage {
+  // load JSON from assets (defualt data)
+  Future<Map<String,dynamic>> loadDefaultJson() async {
+    final file = await rootBundle.loadString('assets/postDataBase.json');
+    return jsonDecode(file);
+  }
+
+  // Save updated JSON to local storage
+  Future<void> saveJsonToLocal(Map<String,dynamic> json) async {
+    // application storage directory
+    final directory = await getApplicationDocumentsDirectory();
+    final filepath = '${directory.path}/Coding/AppDev/test_app/clientDataStore/postDataBase.json';
+
+    // Create a JsonEncoder with the indentation for pretty-printing
+    final encoder = JsonEncoder.withIndent("  ");
+    final formattedJson = encoder.convert(json);
+    
+    // Write JSON to the file
+    final file = File(filepath);
+    await file.writeAsString(formattedJson);
+    print("JSON saved to $filepath");
+  }
+
+  // Load JSON from local storage
+  Future<Map<String, dynamic>> loadJsonFromLocal() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final filePath = '${directory.path}/Coding/AppDev/test_app/clientDataStore/postDataBase.json';
+
+    final file = File(filePath);
+
+    if (await file.exists()) {
+      final contents = await file.readAsString();
+      return jsonDecode(contents);
+    }
+    else {
+      print("Local JSON not found. Using initial data.");
+      return await loadDefaultJson();
+    }
+  }
+
+  Future<void> addPost(Post newPost) async {
+    final json = await loadJsonFromLocal();
+    (json["Posts"] as List).add(newPost.toJson());
+    await saveJsonToLocal(json);
   }
 }
