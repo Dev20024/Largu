@@ -79,6 +79,15 @@ class _PostCreatorPageState extends State<PostCreatorPage> {
       )
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _nameController.dispose();
+    _descriptionController.dispose();
+    _fundsRequestedController.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ dependencies:
   http: ^1.3.0
   path_provider: ^2.0.12
   flutter_riverpod: ^2.0.0
+  shared_preferences: ^2.0.17
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +35,4 @@ flutter:
     - assets/recentPosts.json
     - assets/postDataBase.json
     - assets/cat.jpg
+    - assets/userDataBase.json

@@ -2,6 +2,7 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:namer_app/Pages/current.dart';
+import 'package:namer_app/authchecker.dart';
 
 
 void main() {
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 255, 42)),
         //primaryColor:  Color.fromARGB(255, 53, 252, 3),
       ),
-      home: CurrentPage(),
+      home: AuthChecker(),
     );
   }
 }
