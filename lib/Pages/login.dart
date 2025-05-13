@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:namer_app/Pages/current.dart';
+import 'package:namer_app/Pages/signup.dart';
 import 'package:namer_app/Resources/user.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -88,9 +87,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 padding: EdgeInsets.all(5.0),
                 width: screenWidth * .8,
                 constraints: BoxConstraints(
-                  maxHeight: 300
+                  maxHeight: 300,
+                  maxWidth: 700,
                 ),
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   border: Border.all(
                     color: const Color.fromARGB(101, 0, 0, 0),
                     width: 2.0
@@ -154,7 +155,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                         TextButton(
                           onPressed: () {
-              
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage()));
                           },
                           child: Text(
                             "Sign Up",

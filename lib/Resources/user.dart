@@ -37,7 +37,7 @@ class User {
 
 // A state notifier to manage the user state.
 class UserNotifier extends StateNotifier<User?> {
-  UserNotifier() : super(null);
+  UserNotifier() : super(guest);
 
   void login(User user) {
     state = user;

@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 255, 42)),
         //primaryColor:  Color.fromARGB(255, 53, 252, 3),
       ),
-      home: AuthChecker(),
+      home: CurrentPage(),
     );
   }
 }
