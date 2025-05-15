@@ -21,7 +21,25 @@ class _SignupPageState extends ConsumerState<SignupPage> {
     final displayName = _displayNameController.text.trim();
     final dob = _dateOfBirthController.text.trim();
 
-    if (email.isEmpty || password.isEmpty || displayName.isEmpty || dob.isEmpty) {}
+    bool isVaid = true;
+    String errorMessage = "";
+
+    if (email.isEmpty || password.isEmpty || displayName.isEmpty || dob.isEmpty) {isVaid=false; errorMessage="Please fill out all information!";}
+
+    if (!isVaid) {
+      showDialog(
+        context: context, builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Alert"),
+            content: Text(errorMessage),
+            actions: [
+              TextButton(onPressed: () {Navigator.of(context).pop();}, child: Text("Ok"))
+            ],
+          );
+        }
+      );
+    }
+
   }
 
 
