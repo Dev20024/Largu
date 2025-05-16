@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:namer_app/Resources/Ids.dart';
+import 'package:namer_app/Resources/user.dart';
 
 class SignupPage extends ConsumerStatefulWidget {
 
@@ -9,6 +11,16 @@ class SignupPage extends ConsumerStatefulWidget {
 }
 
 class _SignupPageState extends ConsumerState<SignupPage> {
+   final userStorage = UserStorage();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _displayNameController.dispose();
+    _dateOfBirthController.dispose();
+    super.dispose();
+  }
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -17,14 +29,14 @@ class _SignupPageState extends ConsumerState<SignupPage> {
 
   Future<void> createAccountButtonPressed() async {
     final email = _emailController.text.trim();
-    final password = _passwordController.text.trim();
+    final passWord = _passwordController.text.trim();
     final displayName = _displayNameController.text.trim();
     final dob = _dateOfBirthController.text.trim();
 
     bool isVaid = true;
     String errorMessage = "";
 
-    if (email.isEmpty || password.isEmpty || displayName.isEmpty || dob.isEmpty) {isVaid=false; errorMessage="Please fill out all information!";}
+    if (email.isEmpty || passWord.isEmpty || displayName.isEmpty || dob.isEmpty) {isVaid=false; errorMessage="Please fill out all information!";}
 
     if (!isVaid) {
       showDialog(
@@ -39,6 +51,11 @@ class _SignupPageState extends ConsumerState<SignupPage> {
         }
       );
     }
+    else {
+      print("Creating Account!");
+      User newUser = User(id: generateTimeStampId(), displayName: displayName, email: email, passWord: passWord, dob: dob);
+      userStorage.addUser(newUser);
+    }
 
   }
 
@@ -52,7 +69,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
         title: const Text('Signup Page'),
       ),
       body: Center(
-        child: Flexible(
+        
           child: Container(
             padding: EdgeInsets.all(10.0),
             width: screenWidth * .8,
@@ -83,6 +100,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 SizedBox(height: 15.0),
                 // Email input
                 TextField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                     label: Text("Username"),
                     hintText: "Enter your email",
@@ -93,6 +111,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 SizedBox(height: 25.0),
                 // Password input
                  TextField(
+                  controller: _passwordController,
                   decoration: InputDecoration(
                     label: Text("Password"),
                     hintText: "Create a password",
@@ -103,6 +122,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 SizedBox(height: 25.0),
                 // DisplayName input
                  TextField(
+                  controller: _displayNameController,
                   decoration: InputDecoration(
                     label: Text("Display Name"),
                     hintText: "Create a display name",
@@ -113,6 +133,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 SizedBox(height: 25.0),
                 // DOB input
                  TextField(
+                  controller: _dateOfBirthController,
                   decoration: InputDecoration(
                     label: Text("Date Of Birth"),
                     hintText: "Enter your date of birth",
@@ -122,7 +143,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 ),
                 SizedBox(height: 25.0),
                 ElevatedButton(
-                  onPressed: () {}, 
+                  onPressed: createAccountButtonPressed, 
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0)
@@ -137,7 +158,6 @@ class _SignupPageState extends ConsumerState<SignupPage> {
             ),
           )
         ),
-      ),
     );
   }
 }

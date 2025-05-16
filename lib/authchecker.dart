@@ -1,8 +1,12 @@
 
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:namer_app/Pages/current.dart';
 import 'package:namer_app/Pages/login.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthChecker extends ConsumerStatefulWidget {
@@ -46,16 +50,28 @@ class _AuthCheckerState extends ConsumerState<AuthChecker> {
 }
 
 Future<void> saveAuthToken(String token) async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setString('authToken', token);
+  
 }
 
 Future<bool> isUserAuthenticated() async {
-  final prefs = await SharedPreferences.getInstance();
-  return prefs.containsKey('authToken');
+  
+
 }
 
 Future<void> logout() async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.remove('authToken');
+  
+}
+
+Future<Map<String, dynamic>> fetchUserData() async {
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/userData.json';
+  final file = File(path);
+
+  if (await file.exists()) {
+    final content = await file.readAsString();
+    return jsonDecode(content);
+  }
+  else {
+    
+  }
 }

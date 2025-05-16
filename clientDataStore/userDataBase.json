@@ -1,0 +1,121 @@
+{
+  "Users": [
+    {
+      "id": "user1",
+      "displayName": "John Doe",
+      "email": "johndoe@email.com",
+      "passWord": "password123",
+      "description": "A software developer",
+      "profilePicture": "https://example.com/photo1.jpg",
+      "dob": "1990-01-01"
+    },
+    {
+      "id": "user2",
+      "displayName": "Jane Smith",
+      "email": "janesmith@email.com",
+      "passWord": "securepass456",
+      "description": "A graphic designer",
+      "profilePicture": "https://example.com/photo2.jpg",
+      "dob": "1992-05-15"
+    },
+    {
+      "id": "user3",
+      "displayName": "Alice Johnson",
+      "email": "alicejohnson@email.com",
+      "passWord": "mypassword789",
+      "description": "A data scientist",
+      "profilePicture": "https://example.com/photo3.jpg",
+      "dob": "1988-11-20"
+    },
+    {
+      "id": "user4",
+      "displayName": "Michael Brown",
+      "email": "michaelbrown@email.com",
+      "passWord": "brownie123",
+      "description": "A project manager",
+      "profilePicture": "https://example.com/photo4.jpg",
+      "dob": "1985-07-12"
+    },
+    {
+      "id": "user5",
+      "displayName": "Emily Davis",
+      "email": "emilydavis@email.com",
+      "passWord": "emilysecure456",
+      "description": "A UX designer",
+      "profilePicture": "https://example.com/photo5.jpg",
+      "dob": "1993-03-22"
+    },
+    {
+      "id": "user6",
+      "displayName": "Chris Wilson",
+      "email": "chriswilson@email.com",
+      "passWord": "wilson789",
+      "description": "A marketing specialist",
+      "profilePicture": "https://example.com/photo6.jpg",
+      "dob": "1987-09-10"
+    },
+    {
+      "id": "user7",
+      "displayName": "Sophia Martinez",
+      "email": "sophiamartinez@email.com",
+      "passWord": "sophia123",
+      "description": "A content writer",
+      "profilePicture": "https://example.com/photo7.jpg",
+      "dob": "1995-12-05"
+    },
+    {
+      "id": "user8",
+      "displayName": "Daniel Lee",
+      "email": "daniellee@email.com",
+      "passWord": "lee456",
+      "description": "A business analyst",
+      "profilePicture": "https://example.com/photo8.jpg",
+      "dob": "1991-04-18"
+    },
+    {
+      "id": "user9",
+      "displayName": "Olivia Taylor",
+      "email": "oliviataylor@email.com",
+      "passWord": "olivia789",
+      "description": "A product manager",
+      "profilePicture": "https://example.com/photo9.jpg",
+      "dob": "1994-08-30"
+    },
+    {
+      "id": "user10",
+      "displayName": "Ethan Harris",
+      "email": "ethanharris@email.com",
+      "passWord": "harris123",
+      "description": "A software tester",
+      "profilePicture": "https://example.com/photo10.jpg",
+      "dob": "1989-06-25"
+    },
+    {
+      "id": "1747334378016",
+      "displayName": "Super noob",
+      "email": "Noob",
+      "passWord": "1234",
+      "description": null,
+      "profilePicture": null,
+      "dob": "07/20/2019"
+    },
+    {
+      "id": "1747334393202",
+      "displayName": "Super noob",
+      "email": "Noob",
+      "passWord": "1234",
+      "description": null,
+      "profilePicture": null,
+      "dob": "07/20/2019"
+    },
+    {
+      "id": "1747334734092",
+      "displayName": "test user",
+      "email": "test",
+      "passWord": "test",
+      "description": null,
+      "profilePicture": null,
+      "dob": "07/10/1998"
+    }
+  ]
+}

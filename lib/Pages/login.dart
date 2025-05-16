@@ -54,9 +54,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         for (var user in usersList) user['email']: user,
       };
 
-      if (!userMap.containsKey(email)) {return;}
-      final user = userMap[email];
-      if (user['password'] != passWord) {return;}
+      
+      if (!userMap.containsKey(email)) {print("no email found!");return;}
+      final user = User.fromJson(userMap[email]);
+      print(passWord);
+      print(user.passWord);
+      if (user.passWord != passWord) {print("incorrect password!");return;}
       ref.read(userProvider.notifier).login(user);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CurrentPage()));
     }
@@ -114,8 +117,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     TextField(
                       controller: _userNameController,
                       decoration: InputDecoration(
-                        labelText: "Username",
-                        hintText: "Enter your username",
+                        labelText: "Email",
+                        hintText: "Enter your email",
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.person),
                       ),
