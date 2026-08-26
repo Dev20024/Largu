@@ -1,3 +1,3 @@
-# test_app
+# Donation App Demo
 
-A new Flutter project.
+A donation app demonstration with working UI and localized demo functionality with a test database.
